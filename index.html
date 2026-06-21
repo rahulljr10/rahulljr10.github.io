@@ -9,7 +9,7 @@
 <meta property="og:description" content="I turn AI into marketing that runs itself.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%231d04bd'/><text y='71' x='50' text-anchor='middle' font-size='48' font-family='Georgia,serif' font-weight='900' fill='%23e8e5df'>RK</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231d04bd'/%3E%3Ctext y='68' x='50' text-anchor='middle' font-size='42' font-family='Georgia,serif' font-weight='900' fill='%23e8e5df'%3ERK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -212,20 +212,29 @@ nav{
 .quote-card blockquote em{color:var(--indigo);font-style:normal}
 
 /* ── SKILLS ── */
-.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .s-card{
-  background:var(--card);border:1px solid var(--border);border-radius:20px;padding:34px;
+  background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;
   transition:transform .3s,border-color .3s,box-shadow .3s;cursor:default;
+  position:relative;overflow:hidden;
 }
-.s-card:hover{transform:translateY(-7px);border-color:var(--border-indigo);box-shadow:0 28px 80px var(--glow)}
+.s-card::after{
+  content:'';position:absolute;inset:0;border-radius:18px;
+  background:radial-gradient(ellipse at top left,rgba(29,4,189,.07),transparent 65%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.s-card:hover::after{opacity:1}
+.s-card:hover{transform:translateY(-6px);border-color:var(--border-indigo);box-shadow:0 24px 70px var(--glow)}
 .s-card.wide{grid-column:span 2}
 .s-icon{
-  width:48px;height:48px;border-radius:12px;margin-bottom:20px;
-  background:rgba(29,4,189,.12);border:1px solid rgba(29,4,189,.2);
-  display:flex;align-items:center;justify-content:center;font-size:22px;
+  width:44px;height:44px;border-radius:10px;margin-bottom:16px;
+  background:rgba(29,4,189,.1);border:1px solid rgba(29,4,189,.18);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(160,140,255,.85);
 }
-.s-card h3{font-family:var(--font-h);font-size:18px;font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
-.s-card p{font-size:13.5px;color:var(--muted);line-height:1.75;margin-bottom:18px}
+.s-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.s-card h3{font-family:var(--font-h);font-size:16px;font-weight:700;letter-spacing:-.025em;margin-bottom:6px}
+.s-card p{font-size:12.5px;color:var(--muted);line-height:1.72;margin-bottom:14px}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{
   font-family:var(--font-m);font-size:9.5px;letter-spacing:.07em;
@@ -291,6 +300,65 @@ nav{
   display:block;margin:12px auto 0;padding:5px 16px;border-radius:7px;
   background:var(--indigo);color:#fff;text-align:center;width:fit-content;
   font-family:var(--font-m);font-size:9.5px;letter-spacing:.08em;
+}
+
+/* ── CONTENT GALLERY ── */
+.gallery-tabs{display:flex;gap:8px;margin-bottom:32px}
+.g-tab{
+  font-family:var(--font-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  padding:8px 20px;border-radius:100px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;
+}
+.g-tab.active,.g-tab:hover{background:var(--indigo);border-color:var(--indigo);color:#fff}
+.g-panel{display:none}
+.g-panel.active{display:block}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+}
+.g-item{
+  position:relative;overflow:hidden;border-radius:14px;
+  background:var(--card);border:1px solid var(--border);
+  aspect-ratio:4/3;cursor:pointer;
+  transition:transform .35s,border-color .35s,box-shadow .35s;
+}
+.g-item:nth-child(3n+1){aspect-ratio:4/3}
+.g-item:nth-child(6n+1){grid-column:span 2;aspect-ratio:16/9}
+.g-item:hover{transform:translateY(-5px);border-color:var(--border-indigo);box-shadow:0 20px 60px var(--glow)}
+.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.g-item:hover img{transform:scale(1.06)}
+.g-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(12,14,18,.9) 0%,transparent 50%);
+  opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;
+}
+.g-item:hover .g-overlay{opacity:1}
+.g-placeholder{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
+  background:linear-gradient(135deg,var(--card2),#160a35);
+}
+.g-placeholder-icon{font-size:28px;opacity:.35}
+.g-placeholder-txt{font-family:var(--font-m);font-size:9px;letter-spacing:.12em;color:var(--dim);text-align:center;padding:0 12px}
+.g-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(29,4,189,.85);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .3s,background .3s;
+}
+.g-item:hover .g-play{transform:translate(-50%,-50%) scale(1.1);background:var(--indigo)}
+.g-play svg{width:18px;height:18px;fill:#fff;margin-left:3px}
+.g-label{font-family:var(--font-m);font-size:9px;letter-spacing:.08em;color:rgba(232,229,223,.65);text-transform:uppercase}
+.gallery-note{
+  margin-top:20px;padding:14px 20px;border-radius:10px;
+  background:rgba(29,4,189,.07);border:1px solid rgba(29,4,189,.2);
+  font-family:var(--font-m);font-size:10px;letter-spacing:.07em;color:var(--dim);
+  display:flex;align-items:center;gap:10px;
+}
+.gallery-note span{color:var(--indigo)}
+@media(max-width:1080px){.gallery-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .g-item:nth-child(6n+1){grid-column:span 1}
 }
 
 /* ── RESULTS GALLERY ── */
@@ -470,6 +538,7 @@ footer{
   .bio-card,.facts-card,.quote-card{grid-column:1;grid-row:auto}
   .skills-grid{grid-template-columns:1fr 1fr}
   .s-card.wide{grid-column:1/3}
+  .skills-grid .s-card{grid-column:span 1}
   .projects-grid{grid-template-columns:1fr}
   .contact-inner{grid-template-columns:1fr;padding:60px 32px}
   .contact-island{margin:0 16px 60px}
@@ -479,8 +548,11 @@ footer{
 @media(max-width:640px){
   .hero-h{font-size:44px}
   .s-title{font-size:32px}
-  .skills-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
   .s-card.wide{grid-column:1}
+}
+@media(max-width:400px){
+  .skills-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -488,11 +560,12 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="#">Rahul<div class="logo-dot"></div></a>
+  <a class="logo" href="#">RK<div class="logo-dot"></div></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#work">Work</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#experience">Experience</a></li>
   </ul>
   <a class="nav-cta" href="mailto:rahulkhatri0707@gmail.com">Get in touch →</a>
@@ -592,45 +665,94 @@ footer{
 <!-- SKILLS -->
 <section class="section" id="skills">
   <div class="wrap">
-    <div class="s-eyebrow reveal">What I Build</div>
-    <h2 class="s-title reveal">Six ways I make<br>AI do the work.</h2>
+    <div class="s-eyebrow reveal">What I Do</div>
+    <h2 class="s-title reveal">The full stack of<br>modern marketing.</h2>
     <div class="skills-grid">
+
       <div class="s-card wide reveal">
-        <div class="s-icon">🤖</div>
+        <div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2.2"/><circle cx="4.5" cy="19" r="2.2"/><circle cx="19.5" cy="19" r="2.2"/><path d="M12 6.2L4.5 16.8M12 6.2L19.5 16.8M6.7 19h10.6"/></svg></div>
         <h3>AI Agents &amp; Skills</h3>
-        <p>Custom Claude agents, GPT-powered workflows, and reusable skill packs that handle research, writing, auditing, and more — automatically, at scale.</p>
+        <p>Custom Claude agents, GPT-powered workflows, and reusable skill packs that handle research, writing, auditing, and outreach — automatically, at scale. No prompt copy-pasting.</p>
         <div class="tags"><span class="tag">Claude</span><span class="tag">OpenAI</span><span class="tag">Prompt Design</span><span class="tag">Agent SDK</span><span class="tag">MCP</span></div>
       </div>
+
       <div class="s-card reveal">
-        <div class="s-icon">⚡</div>
-        <h3>Automations</h3>
+        <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+        <h3>Marketing Automations</h3>
         <p>Multi-step workflows connecting tools, triggering on events, running without babysitting.</p>
         <div class="tags"><span class="tag">n8n</span><span class="tag">Zapier</span><span class="tag">APIs</span><span class="tag">Webhooks</span></div>
       </div>
+
       <div class="s-card reveal">
-        <div class="s-icon">🛠️</div>
+        <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M8 3l-4 9 4 9M16 3l4 9-4 9M10 12h4"/></svg></div>
         <h3>Vibe-Coded Tools</h3>
         <p>Fast functional tools — HTML/JS dashboards, internal apps, Chrome extensions. Ship first, refine later.</p>
         <div class="tags"><span class="tag">HTML/JS</span><span class="tag">React</span><span class="tag">GitHub</span></div>
       </div>
+
       <div class="s-card reveal">
-        <div class="s-icon">🎬</div>
+        <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M12 3l2 5h5l-4 3.5 1.5 5L12 14l-4.5 2.5L9 11.5 5 8h5z"/></svg></div>
         <h3>AI Content &amp; UGC</h3>
         <p>AI-generated images, videos, and UGC-style ads produced at volume with consistent brand quality.</p>
-        <div class="tags"><span class="tag">AI Image/Video</span><span class="tag">Canva</span><span class="tag">CapCut</span></div>
+        <div class="tags"><span class="tag">AI Video</span><span class="tag">Canva</span><span class="tag">CapCut</span><span class="tag">Seedance</span></div>
       </div>
+
       <div class="s-card reveal">
-        <div class="s-icon">🔍</div>
+        <div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L22 22"/><path d="M8 11q1.5-2 3 0t3 0"/></svg></div>
         <h3>SEO &amp; AEO</h3>
-        <p>Technical audits, keyword strategy, and answer engine optimisation for AI-era search visibility.</p>
-        <div class="tags"><span class="tag">Ahrefs</span><span class="tag">SEMrush</span><span class="tag">Search Console</span><span class="tag">AEO</span></div>
+        <p>Technical audits, keyword strategy, and answer engine optimisation so you rank — in search and in AI answers.</p>
+        <div class="tags"><span class="tag">Ahrefs</span><span class="tag">SEMrush</span><span class="tag">GSC</span><span class="tag">AEO</span></div>
       </div>
+
       <div class="s-card reveal">
-        <div class="s-icon">📈</div>
-        <h3>Paid Media</h3>
-        <p>Google &amp; Meta campaigns built for efficiency — structure, copy, bid strategy, all optimised.</p>
-        <div class="tags"><span class="tag">Google Ads</span><span class="tag">Meta Ads</span><span class="tag">PMax</span></div>
+        <div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 3c-3 4-3 14 0 18M12 3c3 4 3 14 0 18"/><circle cx="18.5" cy="5.5" r="2.5" fill="currentColor" stroke="none"/></svg></div>
+        <h3>GEO — AI Visibility</h3>
+        <p>Get your brand cited by ChatGPT, Perplexity, and Google AI Overviews. The new organic channel most brands miss.</p>
+        <div class="tags"><span class="tag">ChatGPT</span><span class="tag">Perplexity</span><span class="tag">LLM Citations</span><span class="tag">GEO</span></div>
       </div>
+
+      <div class="s-card reveal">
+        <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M3 20h18M7 20V14M11 20V8M15 20V11M19 20V4"/></svg></div>
+        <h3>Paid Media</h3>
+        <p>Google &amp; Meta campaigns built for efficiency — structure, copy, bid strategy, and constant optimisation.</p>
+        <div class="tags"><span class="tag">Google Ads</span><span class="tag">Meta Ads</span><span class="tag">PMax</span><span class="tag">Shopping</span></div>
+      </div>
+
+      <div class="s-card reveal">
+        <div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <h3>Performance Marketing</h3>
+        <p>Full-funnel thinking — ROAS, CAC, LTV, CRO. Every spend tied back to a number that matters.</p>
+        <div class="tags"><span class="tag">ROAS</span><span class="tag">CRO</span><span class="tag">A/B Testing</span><span class="tag">Funnels</span></div>
+      </div>
+
+      <div class="s-card reveal">
+        <div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><path d="M6 7.5l4.5 3.5M18 7.5L13.5 11M6 16.5l4.5-3.5M18 16.5L13.5 13"/></svg></div>
+        <h3>Social Media Marketing</h3>
+        <p>Content, community, and calendar — built around the algorithm and the audience, not just posting to post.</p>
+        <div class="tags"><span class="tag">Instagram</span><span class="tag">YouTube</span><span class="tag">TikTok</span><span class="tag">LinkedIn</span></div>
+      </div>
+
+      <div class="s-card reveal">
+        <div class="s-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+        <h3>Content Strategy</h3>
+        <p>Editorial calendars, brand voice, and content systems that compound — not just one-off campaigns.</p>
+        <div class="tags"><span class="tag">Content Systems</span><span class="tag">Brand Voice</span><span class="tag">Distribution</span></div>
+      </div>
+
+      <div class="s-card reveal">
+        <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M12 20v-8"/><path d="M8 16a5 5 0 010-8"/><path d="M16 16a5 5 0 000-8"/><path d="M5 19A10 10 0 015 5M19 19A10 10 0 0019 5"/></svg></div>
+        <h3>Outreach Marketing</h3>
+        <p>Digital PR, backlink building, and influencer collaboration that earns authority — not just links.</p>
+        <div class="tags"><span class="tag">Digital PR</span><span class="tag">Link Building</span><span class="tag">Collab</span></div>
+      </div>
+
+      <div class="s-card reveal">
+        <div class="s-icon"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" rx="1"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M6.3 6.3L8 8M16 16l1.7 1.7M6.3 17.7L8 16M16 8l1.7-1.7"/></svg></div>
+        <h3>Technical Marketing</h3>
+        <p>GTM, GA4, attribution modelling, and analytics that actually tell you what's working and what isn't.</p>
+        <div class="tags"><span class="tag">GA4</span><span class="tag">GTM</span><span class="tag">Attribution</span><span class="tag">Looker</span></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -765,6 +887,129 @@ footer{
         <span class="ig-visit">Visit →</span>
       </a>
 
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT GALLERY -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="s-eyebrow reveal">Content Creation</div>
+    <h2 class="s-title reveal">Work that shipped<br>&amp; ran in the wild.</h2>
+
+    <div class="gallery-tabs reveal">
+      <button class="g-tab active" onclick="switchTab('images')">Images</button>
+      <button class="g-tab" onclick="switchTab('videos')">Videos</button>
+    </div>
+
+    <div class="g-panel active" id="g-images">
+      <div class="gallery-grid">
+        <a class="g-item" href="https://drive.google.com/file/d/1vw3Vrh7p5NVaKdDOSZv5sonrPXS0raGK/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1vw3Vrh7p5NVaKdDOSZv5sonrPXS0raGK&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1NhxJqVFa6TANYNDqVHe6iMHBedfHCPPW/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1NhxJqVFa6TANYNDqVHe6iMHBedfHCPPW&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1pdeoHMLkSXHqJhn1OOJ4pj4urzBTR4UM/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1pdeoHMLkSXHqJhn1OOJ4pj4urzBTR4UM&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1Y8yHugLOUkCxNp1w-CPZExX6lKDB9RB3/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1Y8yHugLOUkCxNp1w-CPZExX6lKDB9RB3&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1UxZ3xfOujgXY6GdrR9wsIiPjHu_4bhmY/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1UxZ3xfOujgXY6GdrR9wsIiPjHu_4bhmY&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1maQV3d0yXWCRKzLHnMQm57zNKc8o89IN/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1maQV3d0yXWCRKzLHnMQm57zNKc8o89IN&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1OW21LvL-yZeBxGHKcUxIAuua6lZbCvmc/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1OW21LvL-yZeBxGHKcUxIAuua6lZbCvmc&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1q9-fF7FEV5U0zNrj-l0depLv71QsPY_r/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1q9-fF7FEV5U0zNrj-l0depLv71QsPY_r&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/19pC06R1k-lh0fxwIkG29Wx5WWleoktQq/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=19pC06R1k-lh0fxwIkG29Wx5WWleoktQq&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1QAELztp-y6xI_d5cqn7WSqpPxfuE28Pr/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1QAELztp-y6xI_d5cqn7WSqpPxfuE28Pr&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1IMpYOnstbcaeigkSVrn_5O3y-mk5CnTF/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1IMpYOnstbcaeigkSVrn_5O3y-mk5CnTF&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1xZ37iFBX1ayKIlBgeDYy7tOoWmXECPA0/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1xZ37iFBX1ayKIlBgeDYy7tOoWmXECPA0&sz=w600" alt="Content piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🖼️</div><div class="g-placeholder-txt">Share Drive folder publicly to load</div></div>
+          <div class="g-overlay"><span class="g-label">View full ↗</span></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="g-panel" id="g-videos">
+      <div class="gallery-grid">
+        <a class="g-item" href="https://drive.google.com/file/d/10OIltQg1QVGgI0viyVB7ujxhaHUJZhNl/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=10OIltQg1QVGgI0viyVB7ujxhaHUJZhNl&sz=w600" alt="ये Toy नहीं — Ad Campaign" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🎬</div><div class="g-placeholder-txt">ये Toy नहीं · Campaign</div></div>
+          <div class="g-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="g-overlay"><span class="g-label">ये Toy नहीं · Campaign</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/13cn_ouKkHn5K3webOFd7lPOXH13vabNb/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=13cn_ouKkHn5K3webOFd7lPOXH13vabNb&sz=w600" alt="Winner Video" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🏆</div><div class="g-placeholder-txt">Winner Video · Top Performer</div></div>
+          <div class="g-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="g-overlay"><span class="g-label">Winner Video · Top Performer</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/17aXAPY-hGuY7hRKyaHVBpzGmI1M9e5zz/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=17aXAPY-hGuY7hRKyaHVBpzGmI1M9e5zz&sz=w600" alt="Nov Campaign" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🎬</div><div class="g-placeholder-txt">Nov Campaign</div></div>
+          <div class="g-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="g-overlay"><span class="g-label">Nov Campaign</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1diynXfUUvWtku_2L3JvWZY5eD0lIDaP1/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1diynXfUUvWtku_2L3JvWZY5eD0lIDaP1&sz=w600" alt="Nov Campaign 2" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🎬</div><div class="g-placeholder-txt">Nov Campaign 2</div></div>
+          <div class="g-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="g-overlay"><span class="g-label">Nov Campaign 2</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1jOURarDpjOKV5g2X8pcw8v80TCb_enUh/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1jOURarDpjOKV5g2X8pcw8v80TCb_enUh&sz=w600" alt="Oct Campaign" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🎬</div><div class="g-placeholder-txt">Oct Campaign</div></div>
+          <div class="g-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="g-overlay"><span class="g-label">Oct Campaign</span></div>
+        </a>
+        <a class="g-item" href="https://drive.google.com/file/d/1-mUNTm-gVMdMc3odIWsRHFD7730WsohZ/view" target="_blank" rel="noopener">
+          <img src="https://drive.google.com/thumbnail?id=1-mUNTm-gVMdMc3odIWsRHFD7730WsohZ&sz=w600" alt="Oct Campaign 2" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="g-placeholder" style="display:none"><div class="g-placeholder-icon">🎬</div><div class="g-placeholder-txt">Oct Campaign 2</div></div>
+          <div class="g-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="g-overlay"><span class="g-label">Oct Campaign 2</span></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="gallery-note reveal">
+      <span>⚡</span> To display gallery images and videos, share your Google Drive "Content Creation" folder as <strong>Anyone with the link → Viewer</strong> in Drive settings.
     </div>
   </div>
 </section>
@@ -967,6 +1212,14 @@ const io=new IntersectionObserver(entries=>{
   });
 },{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* gallery tab switch */
+function switchTab(name){
+  document.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.g-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('g-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
 
 /* animated number counters */
 function animateCounter(el){
