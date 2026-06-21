@@ -293,6 +293,106 @@ nav{
   font-family:var(--font-m);font-size:9.5px;letter-spacing:.08em;
 }
 
+/* ── RESULTS GALLERY ── */
+.results-bento{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:auto auto;
+  gap:14px;
+}
+.r-card{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:32px 28px;position:relative;overflow:hidden;
+  transition:transform .35s,border-color .35s,box-shadow .35s;cursor:default;
+}
+.r-card:hover{transform:translateY(-6px);box-shadow:0 24px 70px var(--glow)}
+.r-card::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  transition:opacity .35s;pointer-events:none;
+}
+.r-card:hover::before{opacity:1}
+
+/* Platform colour theming */
+.r-card.gads{border-color:rgba(66,133,244,.2)}
+.r-card.gads::before{background:radial-gradient(ellipse at top left,rgba(66,133,244,.08),transparent 60%)}
+.r-card.gads:hover{border-color:rgba(66,133,244,.4);box-shadow:0 24px 70px rgba(66,133,244,.15)}
+
+.r-card.meta{border-color:rgba(24,119,242,.2)}
+.r-card.meta::before{background:radial-gradient(ellipse at top left,rgba(24,119,242,.08),transparent 60%)}
+.r-card.meta:hover{border-color:rgba(24,119,242,.4);box-shadow:0 24px 70px rgba(24,119,242,.15)}
+
+.r-card.yt{border-color:rgba(255,0,0,.18)}
+.r-card.yt::before{background:radial-gradient(ellipse at top left,rgba(255,0,0,.07),transparent 60%)}
+.r-card.yt:hover{border-color:rgba(255,0,0,.35);box-shadow:0 24px 70px rgba(255,0,0,.1)}
+
+.r-card.ig{border-color:rgba(225,48,108,.2)}
+.r-card.ig::before{background:radial-gradient(ellipse at top left,rgba(225,48,108,.08),transparent 60%)}
+.r-card.ig:hover{border-color:rgba(225,48,108,.4);box-shadow:0 24px 70px rgba(225,48,108,.12)}
+
+/* Span variations */
+.r-card.span2{grid-column:span 2}
+.r-card.span3{grid-column:span 3}
+.r-card.tall{grid-row:span 2}
+
+.r-platform{
+  display:flex;align-items:center;gap:8px;margin-bottom:20px;
+  font-family:var(--font-m);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+}
+.r-plat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.gads .r-plat-dot{background:#4285f4}
+.meta .r-plat-dot{background:#1877f2}
+.yt .r-plat-dot{background:#ff0000}
+.ig .r-plat-dot{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#bc1888)}
+.r-plat-name{color:var(--muted)}
+
+.r-num{
+  font-family:var(--font-h);font-weight:800;letter-spacing:-.04em;
+  line-height:1;margin-bottom:8px;
+  background:linear-gradient(135deg,var(--off) 40%,rgba(232,229,223,.55));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.r-num.big{font-size:clamp(40px,5vw,72px)}
+.r-num.med{font-size:clamp(30px,3.5vw,52px)}
+.r-num.sm{font-size:clamp(24px,2.5vw,38px)}
+
+.r-label{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.r-ctx{
+  font-family:var(--font-m);font-size:9.5px;letter-spacing:.07em;
+  color:var(--dim);border-top:1px solid var(--border);padding-top:10px;margin-top:auto;
+}
+.r-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--font-m);font-size:9px;letter-spacing:.06em;
+  padding:3px 9px;border-radius:6px;background:rgba(34,197,94,.1);
+  color:#22c55e;border:1px solid rgba(34,197,94,.2);margin-bottom:14px;
+}
+.r-card-inner{height:100%;display:flex;flex-direction:column}
+
+/* Marquee strip inside card */
+.r-marquee{overflow:hidden;margin-top:auto;padding-top:16px}
+.r-marquee-track{
+  display:flex;gap:28px;width:max-content;
+  animation:ticker 18s linear infinite;
+}
+.r-marquee-item{
+  font-family:var(--font-m);font-size:9.5px;letter-spacing:.1em;
+  color:var(--dim);white-space:nowrap;text-transform:uppercase;
+}
+
+/* Number count animation */
+.count-num{display:inline-block}
+
+@media(max-width:1080px){
+  .results-bento{grid-template-columns:repeat(2,1fr)}
+  .r-card.span2{grid-column:span 2}
+  .r-card.span3{grid-column:span 2}
+  .r-card.tall{grid-row:span 1}
+}
+@media(max-width:640px){
+  .results-bento{grid-template-columns:1fr}
+  .r-card.span2,.r-card.span3{grid-column:1}
+}
+
 /* ── EXPERIENCE TIMELINE ── */
 .timeline{padding-left:24px;position:relative}
 .timeline::before{
@@ -669,6 +769,108 @@ footer{
   </div>
 </section>
 
+<!-- RESULTS GALLERY -->
+<section class="section" id="results">
+  <div class="wrap">
+    <div class="s-eyebrow reveal">Proof of Work</div>
+    <h2 class="s-title reveal">Real campaigns.<br>Real numbers.</h2>
+    <div class="results-bento">
+
+      <!-- Big hero card: Google Ads total -->
+      <div class="r-card gads span2 tall reveal">
+        <div class="r-card-inner">
+          <div class="r-platform"><span class="r-plat-dot"></span><span class="r-plat-name">Google Ads · Draftss</span></div>
+          <div class="r-badge">↑ All-time account</div>
+          <div class="r-num big"><span class="count-num" data-target="32400" data-suffix="K" data-div="1000">0</span></div>
+          <div class="r-label">Total clicks across<br>3 active search campaigns</div>
+          <div style="margin-top:20px">
+            <div class="r-num med"><span class="count-num" data-target="388" data-suffix="K">0</span></div>
+            <div class="r-label" style="margin-bottom:16px">Impressions</div>
+            <div class="r-num sm">272</div>
+            <div class="r-label">Conversions</div>
+          </div>
+          <div class="r-marquee">
+            <div class="r-marquee-track">
+              <span class="r-marquee-item">Design Pickle</span><span class="r-marquee-item">·</span>
+              <span class="r-marquee-item">ManyPixels</span><span class="r-marquee-item">·</span>
+              <span class="r-marquee-item">Superside</span><span class="r-marquee-item">·</span>
+              <span class="r-marquee-item">Penji</span><span class="r-marquee-item">·</span>
+              <span class="r-marquee-item">Design Pickle</span><span class="r-marquee-item">·</span>
+              <span class="r-marquee-item">ManyPixels</span><span class="r-marquee-item">·</span>
+              <span class="r-marquee-item">Superside</span><span class="r-marquee-item">·</span>
+            </div>
+          </div>
+          <div class="r-ctx">₹9.17M ad spend managed · Sep 2023 – present</div>
+        </div>
+      </div>
+
+      <!-- Meta Reach -->
+      <div class="r-card meta reveal">
+        <div class="r-card-inner">
+          <div class="r-platform"><span class="r-plat-dot"></span><span class="r-plat-name">Meta Ads · Khilonamart</span></div>
+          <div class="r-num big"><span class="count-num" data-target="1.24" data-suffix="M">0</span></div>
+          <div class="r-label">Accounts reached<br>in a single campaign</div>
+          <div class="r-ctx">2.15M impressions · freq 1.73 · ₹87.8K spent</div>
+        </div>
+      </div>
+
+      <!-- YouTube Views -->
+      <div class="r-card yt reveal">
+        <div class="r-card-inner">
+          <div class="r-platform"><span class="r-plat-dot"></span><span class="r-plat-name">YouTube / Video</span></div>
+          <div class="r-badge">↑ +588,244%</div>
+          <div class="r-num big"><span class="count-num" data-target="1.7" data-suffix="M">0</span></div>
+          <div class="r-label">Total video views</div>
+          <div class="r-ctx">52.9K 3-sec views · 2,989 1-min views</div>
+        </div>
+      </div>
+
+      <!-- App Downloads -->
+      <div class="r-card gads reveal">
+        <div class="r-card-inner">
+          <div class="r-platform"><span class="r-plat-dot"></span><span class="r-plat-name">Google Ads · App</span></div>
+          <div class="r-num big"><span class="count-num" data-target="21.5" data-suffix="K">0</span></div>
+          <div class="r-label">App downloads<br>at ₹0.68 avg CPC</div>
+          <div class="r-ctx">2.35M impressions · ₹84.8K total spend</div>
+        </div>
+      </div>
+
+      <!-- Instagram insights -->
+      <div class="r-card ig reveal">
+        <div class="r-card-inner">
+          <div class="r-platform"><span class="r-plat-dot"></span><span class="r-plat-name">Instagram Organic</span></div>
+          <div class="r-num med"><span class="count-num" data-target="85.2" data-suffix="K">0</span></div>
+          <div class="r-label">Views · 52.3K accounts reached</div>
+          <div class="r-ctx">93.9% non-followers · 59.7% from Reels</div>
+        </div>
+      </div>
+
+      <!-- CTR performance card -->
+      <div class="r-card gads span2 reveal">
+        <div class="r-card-inner">
+          <div class="r-platform"><span class="r-plat-dot"></span><span class="r-plat-name">Google Ads · Ad Groups CTR</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:4px">
+            <div>
+              <div class="r-num sm">24.6%</div>
+              <div class="r-label" style="font-size:12px">ManyPixels CTR</div>
+            </div>
+            <div>
+              <div class="r-num sm">16.2%</div>
+              <div class="r-label" style="font-size:12px">Portfolio asset CTR</div>
+            </div>
+            <div>
+              <div class="r-num sm">21.9%</div>
+              <div class="r-label" style="font-size:12px">Branding & Design CTR</div>
+            </div>
+          </div>
+          <div class="r-ctx">Top-performing ad groups & assets · competitor targeting campaigns</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- EXPERIENCE -->
 <section class="section" id="experience">
   <div class="wrap">
@@ -765,6 +967,32 @@ const io=new IntersectionObserver(entries=>{
   });
 },{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* animated number counters */
+function animateCounter(el){
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+  function step(now){
+    const p = Math.min((now-start)/duration, 1);
+    const ease = 1-Math.pow(1-p,3);
+    const val = target * ease;
+    el.textContent = (Number.isInteger(target) ? Math.round(val) : val.toFixed(target<10?1:0)) + suffix;
+    if(p<1) requestAnimationFrame(step);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(step);
+}
+const counterIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.count-num').forEach(el=>animateCounter(el));
+      counterIO.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.r-card').forEach(c=>counterIO.observe(c));
 
 /* hero stagger on load */
 window.addEventListener('load',()=>{
