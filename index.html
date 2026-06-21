@@ -133,25 +133,10 @@ nav{
 }
 .btn-ghost:hover{border-color:var(--indigo);color:#b8adff;transform:translateY(-2px)}
 
-/* hero photo card */
+/* hero animated card */
 .hero-card{position:relative}
-.hero-photo-ring{
-  position:absolute;inset:-4px;border-radius:28px;z-index:-1;
-  background:conic-gradient(from 180deg,var(--indigo),var(--violet),transparent 50%,var(--indigo));
-  animation:spin-ring 8s linear infinite;
-}
-@keyframes spin-ring{to{transform:rotate(360deg)}}
-.hero-photo-box{
-  width:100%;aspect-ratio:3/4;border-radius:26px;overflow:hidden;
-  background:linear-gradient(160deg,var(--card2),#1a0c60);
-  border:1px solid var(--border);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-}
-.hero-photo-box img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-.hero-initials{
-  font-family:var(--font-h);font-weight:900;font-size:110px;letter-spacing:-.06em;line-height:1;
-  background:linear-gradient(135deg,var(--off),var(--indigo));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+.hero-anim-canvas{
+  width:100%;aspect-ratio:3/4;border-radius:26px;display:block;
 }
 .hero-status{
   position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
@@ -436,15 +421,7 @@ footer{
     </div>
 
     <div class="hero-card">
-      <div class="hero-photo-ring"></div>
-      <div class="hero-photo-box">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_2zhsWmWd947dfxc9cw3hPdL78WP/hf_20260620_085343_571c1397-917a-44e0-a9ba-da060273297e.png"
-          alt="Rahul Khatri"
-          onerror="this.style.display='none';document.getElementById('initials').style.display='flex'">
-        <div id="initials" style="display:none;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%">
-          <span class="hero-initials">RK</span>
-        </div>
-      </div>
+      <canvas class="hero-anim-canvas" id="heroAnim"></canvas>
       <div class="hero-status">
         <span class="status-dot"></span>
         Open to AI-first remote roles · Immediate joiner
@@ -796,6 +773,228 @@ window.addEventListener('load',()=>{
     setTimeout(()=>el.classList.add('in'),i*120+100);
   });
 });
+
+/* ── HERO AVATAR ANIMATION ── */
+(function(){
+  const canvas = document.getElementById('heroAnim');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, raf;
+
+  function resize(){
+    const r = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width = r.width * window.devicePixelRatio;
+    H = canvas.height = r.width * (4/3) * window.devicePixelRatio;
+    canvas.style.width = r.width + 'px';
+    canvas.style.height = (r.width * 4/3) + 'px';
+  }
+
+  // Floating icons for AI/marketing theme
+  const ICONS = ['⚡','🤖','📈','🔍','🎯','⚙️','🛠️','✦'];
+  const particles = [];
+  const orbitals = [];
+  let t = 0;
+
+  function init(){
+    particles.length = 0; orbitals.length = 0;
+    // Background particles
+    for(let i=0;i<55;i++){
+      particles.push({
+        x: Math.random()*W, y: Math.random()*H,
+        vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4,
+        r: Math.random()*1.8+.4, a: Math.random()*.7+.1,
+        col: Math.random() > .5 ? '130,100,255' : '29,4,189'
+      });
+    }
+    // Orbital icon rings
+    const cx=W/2, cy=H*0.42;
+    const rings = [
+      {r:W*.28, speed:.006, icons:['🤖','📈','⚡','🎯'], offset:0},
+      {r:W*.19, speed:-.009, icons:['🔍','⚙️'], offset:Math.PI/4},
+    ];
+    rings.forEach(ring=>{
+      ring.icons.forEach((icon,i)=>{
+        orbitals.push({
+          cx, cy, r:ring.r,
+          angle: (i/ring.icons.length)*Math.PI*2 + ring.offset,
+          speed: ring.speed,
+          icon, size: W*.045,
+          opacity:0, targetOpacity:.85
+        });
+      });
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+
+    const cx=W/2, cy=H*0.42;
+
+    // Deep background gradient
+    const bg = ctx.createRadialGradient(cx,cy*0.9,0,cx,cy,W*.75);
+    bg.addColorStop(0,'rgba(26,12,96,.95)');
+    bg.addColorStop(.5,'rgba(16,10,50,.97)');
+    bg.addColorStop(1,'rgba(12,14,18,1)');
+    ctx.fillStyle = bg;
+    ctx.beginPath(); ctx.roundRect(0,0,W,H,W*.06); ctx.fill();
+
+    // Background particles
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${p.col},${p.a})`; ctx.fill();
+    });
+
+    // Outer glow rings
+    [.38,.30,.22].forEach((rr,i)=>{
+      const pulse = Math.sin(t*.015 + i*1.1)*.08+.08;
+      const g = ctx.createRadialGradient(cx,cy,W*rr*.85,cx,cy,W*rr);
+      g.addColorStop(0,'rgba(29,4,189,0)');
+      g.addColorStop(.7,`rgba(91,62,232,${pulse})`);
+      g.addColorStop(1,'rgba(29,4,189,0)');
+      ctx.beginPath(); ctx.arc(cx,cy,W*rr,0,Math.PI*2);
+      ctx.strokeStyle=g; ctx.lineWidth=W*.003; ctx.stroke();
+    });
+
+    // Orbital connector lines
+    orbitals.forEach(o=>{
+      o.angle += o.speed;
+      if(o.opacity < o.targetOpacity) o.opacity = Math.min(o.targetOpacity, o.opacity+.015);
+      const ox = o.cx + Math.cos(o.angle)*o.r;
+      const oy = o.cy + Math.sin(o.angle)*o.r;
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(ox,oy);
+      ctx.strokeStyle=`rgba(91,62,232,${o.opacity*.2})`; ctx.lineWidth=W*.001; ctx.stroke();
+      // icon
+      ctx.font=`${o.size}px serif`;
+      ctx.globalAlpha = o.opacity;
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(o.icon, ox, oy);
+      ctx.globalAlpha=1;
+    });
+
+    // Core glow
+    const coreG = ctx.createRadialGradient(cx,cy,0,cx,cy,W*.13);
+    coreG.addColorStop(0,'rgba(140,110,255,.55)');
+    coreG.addColorStop(.5,'rgba(29,4,189,.25)');
+    coreG.addColorStop(1,'rgba(29,4,189,0)');
+    ctx.beginPath(); ctx.arc(cx,cy,W*.13,0,Math.PI*2);
+    ctx.fillStyle=coreG; ctx.fill();
+
+    // Anime-style face silhouette
+    drawAnimeFace(cx, cy, W*.09, t);
+
+    // RK monogram below face
+    const monoY = cy + W*.175;
+    ctx.font=`900 ${W*.055}px 'Space Grotesk',sans-serif`;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    // gradient text
+    const tg = ctx.createLinearGradient(cx-W*.08,monoY,cx+W*.08,monoY);
+    tg.addColorStop(0,'#e8e5df'); tg.addColorStop(1,'#a89dff');
+    ctx.fillStyle=tg; ctx.fillText('RAHUL KHATRI', cx, monoY);
+
+    // Role label
+    ctx.font=`${W*.022}px 'JetBrains Mono',monospace`;
+    ctx.fillStyle='rgba(122,127,150,.75)';
+    ctx.fillText('AI · MARKETING · BUILDER', cx, monoY + W*.06);
+
+    t++;
+    raf = requestAnimationFrame(draw);
+  }
+
+  function drawAnimeFace(cx, cy, r, t){
+    ctx.save();
+    // Head shape (slightly angular/stylised)
+    ctx.beginPath();
+    ctx.ellipse(cx, cy-r*.1, r*.72, r*.9, 0, 0, Math.PI*2);
+    const headG = ctx.createLinearGradient(cx-r,cy-r,cx+r,cy+r);
+    headG.addColorStop(0,'rgba(190,170,255,.18)');
+    headG.addColorStop(1,'rgba(29,4,189,.08)');
+    ctx.fillStyle=headG; ctx.fill();
+    ctx.strokeStyle='rgba(140,110,255,.35)'; ctx.lineWidth=W*.003; ctx.stroke();
+
+    // Hair (swept back, anime style)
+    ctx.beginPath();
+    ctx.moveTo(cx-r*.72, cy-r*.2);
+    ctx.quadraticCurveTo(cx-r*.8, cy-r*1.1, cx-r*.3, cy-r*1.05);
+    ctx.quadraticCurveTo(cx, cy-r*1.35, cx+r*.35, cy-r*1.08);
+    ctx.quadraticCurveTo(cx+r*.75, cy-r*1.0, cx+r*.72, cy-r*.2);
+    const hairG = ctx.createLinearGradient(cx,cy-r*1.4,cx,cy-r*.2);
+    hairG.addColorStop(0,'rgba(40,20,120,.7)');
+    hairG.addColorStop(1,'rgba(20,10,80,.5)');
+    ctx.fillStyle=hairG; ctx.fill();
+    ctx.strokeStyle='rgba(91,62,232,.4)'; ctx.lineWidth=W*.002; ctx.stroke();
+
+    // Eyes — glowing anime style
+    const eyeY = cy - r*.08;
+    const eyeOff = r*.3;
+    const blink = Math.sin(t*.04)>.97 ? .15 : 1;
+    [-1,1].forEach(side=>{
+      const ex = cx + side*eyeOff;
+      // Eye white
+      ctx.beginPath();
+      ctx.ellipse(ex, eyeY, r*.2, r*.15*blink, 0, 0, Math.PI*2);
+      ctx.fillStyle='rgba(232,229,223,.06)'; ctx.fill();
+      // Iris glow
+      const irisG = ctx.createRadialGradient(ex,eyeY,0,ex,eyeY,r*.12);
+      irisG.addColorStop(0,'rgba(160,140,255,.95)');
+      irisG.addColorStop(.5,'rgba(91,62,232,.8)');
+      irisG.addColorStop(1,'rgba(29,4,189,.3)');
+      ctx.beginPath();
+      ctx.ellipse(ex, eyeY, r*.12, r*.1*blink, 0, 0, Math.PI*2);
+      ctx.fillStyle=irisG; ctx.fill();
+      // Pupil
+      ctx.beginPath();
+      ctx.ellipse(ex, eyeY, r*.04, r*.06*blink, 0, 0, Math.PI*2);
+      ctx.fillStyle='rgba(10,5,40,.9)'; ctx.fill();
+      // Catch light
+      ctx.beginPath();
+      ctx.ellipse(ex+r*.03, eyeY-r*.03, r*.02, r*.015*blink, 0, 0, Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,.9)'; ctx.fill();
+      // Lashes
+      ctx.beginPath();
+      ctx.ellipse(ex, eyeY-r*.11*blink, r*.2, r*.04, 0, 0, Math.PI);
+      ctx.strokeStyle='rgba(140,110,255,.6)'; ctx.lineWidth=W*.004; ctx.stroke();
+    });
+
+    // Nose (minimal, anime style)
+    ctx.beginPath();
+    ctx.moveTo(cx, eyeY + r*.35);
+    ctx.lineTo(cx-r*.08, eyeY+r*.5);
+    ctx.lineTo(cx+r*.08, eyeY+r*.5);
+    ctx.strokeStyle='rgba(140,110,255,.25)'; ctx.lineWidth=W*.002; ctx.stroke();
+
+    // Lips
+    ctx.beginPath();
+    ctx.moveTo(cx-r*.2, eyeY+r*.72);
+    ctx.quadraticCurveTo(cx, eyeY+r*.82, cx+r*.2, eyeY+r*.72);
+    ctx.strokeStyle='rgba(190,150,255,.5)'; ctx.lineWidth=W*.003; ctx.stroke();
+
+    // Subtle cheek blush (anime signature)
+    [-1,1].forEach(side=>{
+      const bx = cx + side*r*.42, by = eyeY + r*.28;
+      const bg = ctx.createRadialGradient(bx,by,0,bx,by,r*.22);
+      bg.addColorStop(0,'rgba(255,120,180,.18)');
+      bg.addColorStop(1,'rgba(255,120,180,0)');
+      ctx.beginPath(); ctx.ellipse(bx,by,r*.22,r*.1,0,0,Math.PI*2);
+      ctx.fillStyle=bg; ctx.fill();
+    });
+
+    // Tech circuit lines on face (cyberpunk anime accent)
+    const pulse2 = (Math.sin(t*.025)+1)/2;
+    ctx.strokeStyle=`rgba(91,62,232,${.12+pulse2*.15})`; ctx.lineWidth=W*.0015;
+    ctx.beginPath(); ctx.moveTo(cx+r*.55,cy-r*.1); ctx.lineTo(cx+r*.72,cy-r*.1);
+    ctx.lineTo(cx+r*.72,cy+r*.15); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-r*.55,cy-r*.1); ctx.lineTo(cx-r*.72,cy-r*.1);
+    ctx.lineTo(cx-r*.72,cy+r*.15); ctx.stroke();
+
+    ctx.restore();
+  }
+
+  window.addEventListener('resize',()=>{resize();init()});
+  resize(); init(); draw();
+})();
 </script>
 </body>
 </html>
