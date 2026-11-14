@@ -309,6 +309,24 @@ nav{
 .still-cap{font-family:var(--font-m);font-size:9.5px;letter-spacing:.06em;color:var(--muted);padding:9px 12px;text-transform:uppercase}
 .case-cta{display:flex;align-items:center;gap:8px}
 
+/* ── WRITING ── */
+.w-intro{font-size:15.5px;color:var(--muted);line-height:1.85;max-width:680px;margin:-40px 0 48px}
+.w-intro strong{color:var(--off)}
+.w-label{font-family:var(--font-m);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:44px 0 16px}
+.w-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.w-grid.two{grid-template-columns:repeat(2,1fr)}
+.w-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s}
+.w-card:hover{transform:translateY(-6px);border-color:var(--border-indigo);box-shadow:0 24px 70px var(--glow)}
+.w-card h3{font-family:var(--font-h);font-size:19px;font-weight:700;letter-spacing:-.03em;margin:14px 0 8px;line-height:1.25}
+.w-card p{font-size:13.5px;color:var(--muted);line-height:1.75;margin-bottom:18px}
+.w-card .p-link{margin-top:auto}
+.w-pills{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+.w-pill{background:rgba(29,4,189,.08);border:1px solid rgba(29,4,189,.22);border-radius:16px;padding:20px 22px}
+.w-pill b{display:block;font-family:var(--font-h);font-size:15px;letter-spacing:-.02em;margin-bottom:5px}
+.w-pill span{font-size:12.5px;color:var(--muted);line-height:1.6}
+@media(max-width:1080px){.w-grid,.w-grid.two{grid-template-columns:1fr}.w-pills{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.w-pills{grid-template-columns:1fr}}
+
 /* ── BRANDS ── */
 .brands-scroll{overflow-x:auto;padding:4px 52px 20px;
   scrollbar-width:thin;scrollbar-color:var(--indigo) var(--card);}
@@ -556,7 +574,9 @@ footer{
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.in{opacity:1;tran
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="previous-work.html">Past Work</a></li>sform:translateY(0)}
 
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1!important;transform:none!important;transition:none!important}
@@ -620,7 +640,7 @@ footer{
   <div class="hero-inner">
 
     <div class="hero-left">
-      <div class="eyebrow">AI-first marketer · builder · Indore, India</div>
+      <div class="eyebrow">AI-first marketer · builder</div>
       <h1 class="hero-h">
         <span class="ln1">I turn AI into</span>
         <span class="ln2">marketing that</span>
@@ -689,7 +709,6 @@ footer{
       </div>
       <div class="facts-card reveal">
         <h5>Quick Facts</h5>
-        <div class="fact"><div class="fact-k">Based in</div><div class="fact-v">Indore, India</div></div>
         <div class="fact"><div class="fact-k">Availability</div><div class="fact-v">Immediate joiner</div></div>
         <div class="fact"><div class="fact-k">Work style</div><div class="fact-v">Remote-first</div></div>
         <div class="fact"><div class="fact-k">Experience</div><div class="fact-v">3+ years</div></div>
@@ -955,6 +974,83 @@ footer{
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section class="section" id="writing">
+  <div class="wrap">
+    <div class="s-eyebrow reveal">Writing</div>
+    <h2 class="s-title reveal">Words that rank,<br>get cited, get read.</h2>
+    <p class="w-intro reveal">Nobody owes your article their attention, so I write for three readers at once: <strong>the search result, the AI answer box, and the human with 40 seconds</strong>. Mostly tech, SaaS and AI marketing. Everything below is something I actually wrote and published.</p>
+
+    <div class="w-label reveal">Articles</div>
+    <div class="w-grid">
+      <div class="w-card reveal">
+        <div class="tags"><span class="tag">Blog</span><span class="tag">AI Marketing</span></div>
+        <h3>Is AI UGC Worth It? What 100+ AI Ads Actually Taught Us</h3>
+        <p>An honest breakdown of cost, speed and performance. It says where AI UGC wins and where it does not, which is exactly why people trust it. Written for my studio, BYDTRND.</p>
+        <a class="p-link" href="https://bydtrnd.com/is-ai-ugc-worth-it/" target="_blank" rel="noopener">Read the article →</a>
+      </div>
+      <div class="w-card reveal">
+        <div class="tags"><span class="tag">Comparison</span><span class="tag">AI Marketing</span></div>
+        <h3>AI UGC vs Influencers</h3>
+        <p>A head to head for buyers who are already deciding. Costs, turnaround, testing volume and trust, laid out so the choice makes itself. Written for BYDTRND.</p>
+        <a class="p-link" href="https://bydtrnd.com/ai-ugc-vs-influencers/" target="_blank" rel="noopener">Read the article →</a>
+      </div>
+      <div class="w-card reveal">
+        <div class="tags"><span class="tag">How-to</span><span class="tag">Branding</span></div>
+        <h3>How to Build Brand Consistency</h3>
+        <p>A practical guide I wrote while working at Draftss, the design subscription agency. Plain language, real steps, zero corporate fog.</p>
+        <a class="p-link" href="https://draftss.com/how-to-build-brand-consistency" target="_blank" rel="noopener">Read the article →</a>
+      </div>
+    </div>
+
+    <div class="w-label reveal">Website copy</div>
+    <div class="w-grid two">
+      <div class="w-card reveal">
+        <div class="tags"><span class="tag">Mobility</span><span class="tag">Client project</span></div>
+        <h3>AYRO</h3>
+        <p>Won the project and wrote the full website content for a rideshare app that puts drivers and riders first: transparent pricing, fair earnings, safer rides.</p>
+        <a class="p-link" href="https://www.ayroapp.com/" target="_blank" rel="noopener">See the site →</a>
+      </div>
+      <div class="w-card reveal">
+        <div class="tags"><span class="tag">SaaS</span><span class="tag">Client project</span></div>
+        <h3>TalleFlow</h3>
+        <p>Won the project and wrote the website content for a CRM built for creatives and event pros. Proposals, payments and client portals explained like a human would explain them.</p>
+        <a class="p-link" href="https://talleflow.com/" target="_blank" rel="noopener">See the site →</a>
+      </div>
+    </div>
+
+    <div class="w-label reveal">Where I publish</div>
+    <div class="w-grid">
+      <div class="w-card reveal">
+        <div class="tags"><span class="tag">My studio</span></div>
+        <h3>BYDTRND Studio</h3>
+        <p>My AI creative agency. I run it and I personally write every word on the site and blog. Basically a writing gym with paying clients.</p>
+        <a class="p-link" href="https://bydtrnd.com" target="_blank" rel="noopener">bydtrnd.com →</a>
+        <a class="p-link" style="margin-top:10px" href="https://www.instagram.com/bydtrnd.studio/" target="_blank" rel="noopener">@bydtrnd.studio on Instagram →</a>
+      </div>
+      <div class="w-card reveal">
+        <div class="tags"><span class="tag">Instagram</span><span class="tag">AI content</span></div>
+        <h3>@gobeyondrahul</h3>
+        <p>My AI content channel. Short, punchy scripts and captions about AI tools, written to stop the scroll.</p>
+        <a class="p-link" href="https://www.instagram.com/gobeyondrahul/" target="_blank" rel="noopener">Follow on Instagram →</a>
+      </div>
+      <div class="w-card reveal">
+        <div class="tags"><span class="tag">YouTube</span><span class="tag">Clipping</span></div>
+        <h3>ClipperInMotion</h3>
+        <p>My YouTube clipping channel. Pulling the best 30 seconds out of long content is secretly the best training for headlines and hooks.</p>
+        <a class="p-link" href="https://www.youtube.com/@ClipperInMotion" target="_blank" rel="noopener">Watch on YouTube →</a>
+      </div>
+    </div>
+
+    <div class="w-pills reveal">
+      <div class="w-pill"><b>Headlines that earn the click</b><span>Titles written for CTR and for press.</span></div>
+      <div class="w-pill"><b>SEO, AEO and GEO built in</b><span>Ahrefs, Semrush, GA4 and GSC in the workflow.</span></div>
+      <div class="w-pill"><b>Edits without drama</b><span>Feedback in, revision out, ego left at the door.</span></div>
+      <div class="w-pill"><b>Outreach that is not spammy</b><span>Editorial backlinks that reporters actually want to give.</span></div>
     </div>
   </div>
 </section>
@@ -1291,7 +1387,7 @@ footer{
   </div>
 </div>
 
-<footer>© 2026 Rahul Khatri · AI-First Marketing &amp; Automation · Indore, India</footer>
+<footer>© 2026 Rahul Khatri · AI-First Marketing &amp; Automation</footer>
 
 <script>
 /* starfield */
