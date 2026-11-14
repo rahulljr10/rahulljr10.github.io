@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video and Social: Rahul Khatri</title>
+<meta name="description" content="Short form video edits, client reels, social posts and the channels I run.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c0e12;--card:#13171d;--card2:#181c25;--indigo:#1d04bd;--off:#e8e5df;--muted:#7a7f96;--dim:#3a3f55;--border:rgba(232,229,223,.06);--bi:rgba(29,4,189,.35);--glow:rgba(29,4,189,.2);--fh:'Space Grotesk',sans-serif;--fb:'Inter',sans-serif;--fm:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--off);font-family:var(--fb);line-height:1.65;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:20px 52px;background:rgba(12,14,18,.75);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--fh);font-weight:800;font-size:20px;color:var(--off);text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none}.nav-links a{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.nav-links a:hover,.nav-links a.active{color:#b8adff}
+.nav-cta{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:9px 22px;border-radius:100px;background:var(--indigo);color:var(--off);text-decoration:none}
+@media(max-width:1080px){.nav-links{display:none}}
+.wrap{max-width:1320px;margin:0 auto;padding:0 52px}
+.eyebrow{font-family:var(--fm);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--indigo);margin-bottom:16px}
+h1{font-family:var(--fh);font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-.04em;line-height:1.07;margin-bottom:20px;max-width:760px}
+.intro{color:var(--muted);max-width:680px;margin-bottom:64px}
+.grp{margin-bottom:64px}.grp h2{font-family:var(--fh);font-size:22px;letter-spacing:-.02em}.grp .sub{font-family:var(--fm);font-size:11px;color:var(--muted);margin:4px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s}
+.card:hover{transform:translateY(-5px);border-color:var(--bi);box-shadow:0 20px 60px var(--glow)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.07em;padding:4px 10px;border-radius:6px;background:rgba(29,4,189,.1);color:rgba(232,229,223,.6);border:1px solid rgba(29,4,189,.18)}
+.card h3{font-family:var(--fh);font-size:18px;font-weight:700;letter-spacing:-.02em;margin:14px 0 8px;line-height:1.25}
+.card p{font-size:13.5px;color:var(--muted);margin-bottom:18px}
+.card a{margin-top:auto;font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;color:#8c7bff;text-decoration:none}
+.card a:hover{text-decoration:underline}
+
+.ch{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:70px}
+.chc{background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid var(--bi);border-radius:22px;padding:30px;display:flex;flex-direction:column;box-shadow:0 20px 70px var(--glow)}
+.chc h3{font-family:var(--fh);font-size:24px;letter-spacing:-.03em;margin:14px 0 6px}.chc p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 18px}.stat b{display:block;font-family:var(--fh);font-size:30px;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#a89dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat span{font-size:12px;color:var(--muted)}.note{font-family:var(--fm);font-size:10px;color:var(--dim);margin-bottom:16px}
+.chc a.go{margin-top:auto;display:inline-block;align-self:flex-start;padding:10px 20px;border-radius:100px;background:var(--indigo);color:var(--off);text-decoration:none;font-family:var(--fm);font-size:11px;letter-spacing:.08em}
+.vg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.v{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s,border-color .3s}
+.v:hover{transform:translateY(-4px);border-color:var(--bi)}.v video{width:100%;display:block;background:#000;max-height:460px}
+.vt{padding:12px 14px;font-size:13px;color:var(--muted)}.vt b{display:block;color:var(--off);font-family:var(--fh);font-size:14px}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}.car img{scroll-snap-align:start;width:min(80vw,340px);border-radius:14px;border:1px solid var(--border);flex:0 0 auto}
+.posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}.post{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px}.post>img{width:100%;max-width:380px;border-radius:12px;display:block}
+.contact{max-width:1220px;margin:0 auto 80px;padding:48px 56px;border-radius:26px;background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid var(--bi);display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.contact h2{font-family:var(--fh);font-size:clamp(26px,3vw,40px);letter-spacing:-.03em}.contact a{display:block;color:var(--off);text-decoration:none;margin:6px 0}
+footer{text-align:center;padding:30px;color:var(--dim);font-family:var(--fm);font-size:10.5px}
+@media(max-width:640px){nav{padding:16px 20px}.wrap{padding:0 20px}.contact{padding:32px 24px}}
+</style></head><body>
+<nav><a class="logo" href="index.html">RK</a>
+<ul class="nav-links"><li><a href="index.html#about">About</a></li><li><a href="index.html#skills">Skills</a></li><li><a href="index.html#work">Work</a></li><li><a href="index.html#writing">Writing</a></li><li><a href="previous-work.html">Past Work</a></li><li><a href="video-work.html" class="active">Video</a></li><li><a href="proof.html">Proof</a></li><li><a href="index.html#experience">Experience</a></li></ul>
+<a class="nav-cta" href="mailto:rahulkhatri0707@gmail.com">Get in touch →</a></nav>
+<section style="padding:170px 0 60px"><div class="wrap">
+<div class="eyebrow">Video and social</div>
+<h1>Edits, reels and the channels I run.</h1>
+<p class="intro">Short form video editing, client reels, social posts and my own channels. Tap any video to play it.</p>
+<div class="eyebrow">Channels I run</div>
+<div class="ch">
+<div class="chc"><div class="tags"><span class="tag">YouTube</span><span class="tag">Clipping</span></div><h3>ClipperInMotion</h3><p>Podcast clipping channel. I pick the moments, cut, caption and publish.</p>
+<div class="stats"><div class="stat"><b>700K+</b><span>lifetime views</span></div><div class="stat"><b>443</b><span>subscribers</span></div><div class="stat"><b>12.5K</b><span>views in 48 hours</span></div><div class="stat"><b>6 wks</b><span>since first upload</span></div></div>
+<div class="note">YouTube Studio, 24 Sep to 12 Nov 2026</div><a class="go" href="https://www.youtube.com/@ClipperInMotion" target="_blank" rel="noopener">Watch on YouTube →</a></div>
+<div class="chc"><div class="tags"><span class="tag">Instagram</span><span class="tag">AI content</span></div><h3>@gobeyondrahul</h3><p>My AI content channel: tools, workflows and short form videos about making things with AI.</p><a class="go" href="https://www.instagram.com/gobeyondrahul/" target="_blank" rel="noopener">Follow on Instagram →</a></div>
+<div class="chc"><div class="tags"><span class="tag">Instagram</span><span class="tag">Studio</span></div><h3>@bydtrnd.studio</h3><p>The page for my AI creative agency: AI UGC ads, product videos and client work.</p><a class="go" href="https://www.instagram.com/bydtrnd.studio/" target="_blank" rel="noopener">Follow on Instagram →</a></div>
+</div>
+
+<div class="grp"><h2>Client reels</h2><div class="sub">Short form videos edited for client brands.</div><div class="vg">
+<div class="v"><video src="assets/videos/optician-reel.mp4" poster="assets/posters/optician-reel.jpg" controls playsinline preload="none"></video><div class="vt"><b>Optician reel</b></div></div><div class="v"><video src="assets/videos/watches-reel.mp4" poster="assets/posters/watches-reel.jpg" controls playsinline preload="none"></video><div class="vt"><b>Watches reel</b></div></div><div class="v"><video src="assets/videos/uv-reel-1.mp4" poster="assets/posters/uv-reel-1.jpg" controls playsinline preload="none"></video><div class="vt"><b>UV reel 1</b></div></div><div class="v"><video src="assets/videos/uv-reel-2.mp4" poster="assets/posters/uv-reel-2.jpg" controls playsinline preload="none"></video><div class="vt"><b>UV reel 2</b></div></div><div class="v"><video src="assets/videos/uv-reel-3.mp4" poster="assets/posters/uv-reel-3.jpg" controls playsinline preload="none"></video><div class="vt"><b>UV reel 3</b></div></div><div class="v"><video src="assets/videos/post-1-reel.mp4" poster="assets/posters/post-1-reel.jpg" controls playsinline preload="none"></video><div class="vt"><b>Post 1 reel</b></div></div><div class="v"><video src="assets/videos/post-2-reel.mp4" poster="assets/posters/post-2-reel.jpg" controls playsinline preload="none"></video><div class="vt"><b>Post 2 reel</b></div></div><div class="v"><video src="assets/videos/post-3.mp4" poster="assets/posters/post-3.jpg" controls playsinline preload="none"></video><div class="vt"><b>Post 3 video</b></div></div></div></div>
+
+<div class="grp"><h2>Client social posts</h2><div class="sub">Designed for feed and carousel formats.</div><div class="posts">
+<div class="post"><div class="tags"><span class="tag">Single image</span></div><h3 style="font-family:var(--fh);margin:12px 0">Post 1: June vlog collage</h3><img src="assets/posts/post-1.jpg" alt="Client post 1, June vlog collage" loading="lazy"></div>
+<div class="post"><div class="tags"><span class="tag">7 slide carousel</span></div><h3 style="font-family:var(--fh);margin:12px 0">Post 2: carousel</h3><div class="car"><img src="assets/posts/post-2-slide-1.jpg" alt="Client post 2, slide 1" loading="lazy"><img src="assets/posts/post-2-slide-2.jpg" alt="Client post 2, slide 2" loading="lazy"><img src="assets/posts/post-2-slide-3.jpg" alt="Client post 2, slide 3" loading="lazy"><img src="assets/posts/post-2-slide-4.jpg" alt="Client post 2, slide 4" loading="lazy"><img src="assets/posts/post-2-slide-5.jpg" alt="Client post 2, slide 5" loading="lazy"><img src="assets/posts/post-2-slide-6.jpg" alt="Client post 2, slide 6" loading="lazy"><img src="assets/posts/post-2-slide-7.jpg" alt="Client post 2, slide 7" loading="lazy"></div></div>
+</div></div>
+
+<div class="grp"><h2>Short form edits</h2><div class="sub">Story driven edits with sound, pacing and cuts.</div><div class="vg">
+<div class="v"><video src="assets/videos/edit-1.mp4" poster="assets/posters/edit-1.jpg" controls playsinline preload="none"></video><div class="vt"><b>Edit 1</b></div></div><div class="v"><video src="assets/videos/edit-2.mp4" poster="assets/posters/edit-2.jpg" controls playsinline preload="none"></video><div class="vt"><b>Edit 2</b></div></div><div class="v"><video src="assets/videos/edit-3.mp4" poster="assets/posters/edit-3.jpg" controls playsinline preload="none"></video><div class="vt"><b>Edit 3</b></div></div><div class="v"><video src="assets/videos/edit-4.mp4" poster="assets/posters/edit-4.jpg" controls playsinline preload="none"></video><div class="vt"><b>Edit 4</b></div></div><div class="v"><video src="assets/videos/edit-5.mp4" poster="assets/posters/edit-5.jpg" controls playsinline preload="none"></video><div class="vt"><b>Edit 5</b></div></div></div></div>
+
+<div class="grp"><h2>Clips from ClipperInMotion</h2><div class="sub">Cut from long podcasts into 30 to 60 second clips.</div><div class="vg">
+<div class="v"><video src="assets/videos/clip-dana-white.mp4" poster="assets/posters/clip-dana-white.jpg" controls playsinline preload="none"></video><div class="vt"><b>Dana White</b><br>Building a business empire</div></div><div class="v"><video src="assets/videos/clip-simon-sinek.mp4" poster="assets/posters/clip-simon-sinek.jpg" controls playsinline preload="none"></video><div class="vt"><b>Simon Sinek</b><br>What winning really means</div></div><div class="v"><video src="assets/videos/clip-sahar-yousef.mp4" poster="assets/posters/clip-sahar-yousef.jpg" controls playsinline preload="none"></video><div class="vt"><b>Dr. Sahar Yousef</b><br>A hack to work faster</div></div><div class="v"><video src="assets/videos/clip-mel-robbins.mp4" poster="assets/posters/clip-mel-robbins.jpg" controls playsinline preload="none"></video><div class="vt"><b>Mel Robbins</b><br>Your life can change completely</div></div><div class="v"><video src="assets/videos/clip-hormozi.mp4" poster="assets/posters/clip-hormozi.jpg" controls playsinline preload="none"></video><div class="vt"><b>Alex Hormozi</b><br>Stop letting money control you</div></div><div class="v"><video src="assets/videos/clip-joe-hudson.mp4" poster="assets/posters/clip-joe-hudson.jpg" controls playsinline preload="none"></video><div class="vt"><b>Joe Hudson</b><br>Why smart people fear failing</div></div></div></div>
+</div></section>
+<div class="contact"><div><div class="eyebrow">Contact</div><h2>Need a video editor?</h2></div><div>
+<a href="mailto:rahulkhatri0707@gmail.com">✉️ rahulkhatri0707@gmail.com</a><a href="tel:+918319029608">📱 +91 83190 29608</a>
+<a href="https://www.linkedin.com/in/rahul-khatri-364252241" target="_blank" rel="noopener">💼 LinkedIn</a><a href="index.html">← Back to portfolio</a></div></div>
+<footer>© 2026 Rahul Khatri · AI-First Marketing &amp; Automation</footer></body></html>
